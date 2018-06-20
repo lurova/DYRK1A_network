@@ -1,0 +1,142 @@
+V1,V2,Effect,Location,Description,Tissue
+DYRK1A DYRK MNB MNBH,DYRK1A DYRK MNB MNBH,1,..,..,..
+DYRK1A DYRK MNB MNBH,REST NRSF XBR,0,..,DYRK1A promotes instability of REST.,..
+REST NRSF XBR,DYRK1A DYRK MNB MNBH,1,N,REST activates DYRK1A transcription. Negative feedback loop,..
+YWHAB,DYRK1A DYRK MNB MNBH,1,..,14-3-3 protein beta/alpha  //  In the paper it is mentioned the interaction with 14-3-3_ //  Ser520 phosphorylated is required,..
+YWHAE,DYRK1A DYRK MNB MNBH,1,N,14-3-3 protein epsilon,..
+YWHAG,DYRK1A DYRK MNB MNBH,..,..,14-3-3 protein gamma,..
+DYRK1A DYRK MNB MNBH,GLI1 GLI,1,..,..,..
+DYRK1A DYRK MNB MNBH,CREB1,1,N,"Dyrk1a phosphorylates CREB, inducing CRE-dependent gene expression. Activation then?",..
+PHYHIP DYRK1AP3 KIAA0273 PAHX-AP1,DYRK1A DYRK MNB MNBH,..,N to C,Dyrk1a is translocated from the nucleus to the cytoplasm in the presence of PAHX-AP1 //  Kinase independent interaction,Brain specific
+DYRK1A DYRK MNB MNBH,CCNL2 SB138,1,N,Phosphorylation (regulation of splicing) //  inducing apoptosis by modulating the expression of apoptotic and antiapoptotic proteins // phosphorylation of SR proteins is necessary for their recruitment from nuclear speckles to sites of transcription/pre-mRNA processing,..
+DYRK1A DYRK MNB MNBH,CDKN1B KIP1,1,..,The protein is p27. Phosphorylation at Ser10  (stabilization of the protein) //  Encoded by gene CDKN1B (cyclin dependent kinase inhibitor 1B),..
+DYRK1A DYRK MNB MNBH,FOXO1 FKHR FOXO1A,0,..,"nuclear exclusion of FoxO1, a transcription factor  //  increased expression of DYRK1A was associated with an increased level of phosphorylated FKHR that implies an increased rate of FKHR inactivation",..
+DYRK1A DYRK MNB MNBH,SF3B1 SAP155,1,..,"SAP155, subunit of spliceosome, phosphorylation is important for splicing catalysis  //  It is mentioned that SF3b1 must be phosphorylated to be active, so I assume that this phosphorylation from Dryk1a activates it //   It is phosphorylated at Thr434.  When no DYRK1A, no phosphorylation and no constitutive splicing (in spermatogonia)",..
+DYRK1A DYRK MNB MNBH,ABCD3 PMP70 PXMP1,..,..,..,..
+DYRK1A DYRK MNB MNBH,DNM1 DNM,0,..,"dynamin 1  //  Dyrk1A inhibits the onset of clathrin-mediated endocytosis in neurons by phosphorylating dynamin 1, amphiphysin 1, and synaptojanin 1.",..
+DYRK1A DYRK MNB MNBH,AMPH AMPH1,0,..,"dynamin 1  //  Dyrk1A inhibits the onset of clathrin-mediated endocytosis in neurons by phosphorylating dynamin 1, amphiphysin 1, and synaptojanin 1.",..
+DYRK1A DYRK MNB MNBH,APP A4 AD1,1,..,Phosphorlation promotes the cleavage of APP.,..
+DYRK1A DYRK MNB MNBH,BARD1,..,..,..,..
+DYRK1A DYRK MNB MNBH,BRCA1 RNF53,..,..,..,..
+DYRK1A DYRK MNB MNBH,CCNA2 CCN1 CCNA,..,..,..,..
+DYRK1A DYRK MNB MNBH,CLTC CLH17 CLTCL2 KIAA0034,0,..,Clathrin heavy chain  //  Possible dissociation from the clathrin coated vesicles,..
+DYRK1A DYRK MNB MNBH,CREBBP CBP,..,..,..,..
+DYRK1A DYRK MNB MNBH,DCAF7,1,..,DYRK1A/DCAF7 complex  // Protein Han11,..
+DYRK1A DYRK MNB MNBH,DYNLL1 DLC1 DNCL1 DNCLC1 HDLC1,..,..,..,..
+DYRK1A DYRK MNB MNBH,DYNLL2,..,..,..,..
+DYRK1A DYRK MNB MNBH,ID2 BHLHB26,0,..,Phosphorylation in Thr27,..
+DYRK1A DYRK MNB MNBH,EP300 P300,..,..,..,..
+DYRK1A DYRK MNB MNBH,FAM117A,..,..,..,..
+DYRK1A DYRK MNB MNBH,FAM117B ALS2CR13,..,..,..,..
+DYRK1A DYRK MNB MNBH,FAM53C C5orf6,..,..,..,..
+DYRK1A DYRK MNB MNBH,FNTA,..,..,DYRK1A was found in¾complexes containing the farnesyltransferases FNTA and FNTB,..
+DYRK1A DYRK MNB MNBH,FOXR2 FOXN6,..,..,..,..
+DYRK1A DYRK MNB MNBH,TP53 P53,..,..,"Interaction through SIRT1, not direct.",..
+DYRK1A DYRK MNB MNBH,GLCCI1,..,..,..,..
+DYRK1A DYRK MNB MNBH,HIPK2,..,..,..,..
+DYRK1A DYRK MNB MNBH,NFATC1 NFAT2 NFATC,0,N to C,"DYRK1A acts as a priming kinase that enables additional phosphorylation of NFAT by CK1 and GSK-3 leading to NFAT inactivation  //  In the paper it is called NFAT or NFATc.  //  rules: not DYRK1A and not MAP3K1 and not GSK3 //  DYRK1Agene, which acts synergistically with DSCR1 toprevent nuclear occupancy of NFATc transcription factors",..
+DYRK1A DYRK MNB MNBH,CCND1 BCL1 PRAD1,0,..,Phosphorylation at Thr286 (degradation)  //  Cyclin D1 inhibits p27 (above).   ,..
+DYRK1A DYRK MNB MNBH,DDB1 XAP1,..,..,..,..
+DYRK1A DYRK MNB MNBH,CUL9 H7AP1 KIAA0708 PARC,..,..,..,..
+DYRK1A DYRK MNB MNBH,HIST1H2BB,..,..,..,..
+DYRK1A DYRK MNB MNBH,HIST1H3A,..,..,..,..
+DYRK1A DYRK MNB MNBH,HIST1H4A,..,..,..,..
+DYRK1A DYRK MNB MNBH,KIAA0232,..,..,..,..
+DYRK1A DYRK MNB MNBH,LIN52 C14orf46,1,..,"phosphorylation of LIN52 promoting the formation of the repressor complex // phosphoration on LIN52ser28, necessary for DREAM asembly",..
+DYRK1A DYRK MNB MNBH,LIPH LPDLR MPAPLA1 PLA1B,..,..,..,..
+DYRK1A DYRK MNB MNBH,LRCH3,..,..,..,..
+DYRK1A DYRK MNB MNBH,LZTS2 KIAA1813 LAPSER1,..,..,..,..
+DYRK1A DYRK MNB MNBH,SNCA NACP PARK1,0,..,Induces intracytoplasmic aggregation (LB bodies),Neuronal cells
+DYRK1A DYRK MNB MNBH,MAP3K5 ASK1 MAPKKK5 MEKK5,1,..,"Also called ASK1. Positively regulates p38 and JNK pathway. Activators: TNF receptor-ssociated factors 2/6, Daxx.Inhibitors: thioredoxin, Hsp90, 14-3-3",..
+DYRK1A DYRK MNB MNBH,MED23 ARC130 CRSP3 DRIP130 KIAA1216 SUR2,..,..,..,..
+DYRK1A DYRK MNB MNBH,MOV10 KIAA1631,..,..,..,..
+DYRK1A DYRK MNB MNBH,NTRK1 MTC TRK TRKA,..,..,..,..
+DYRK1A DYRK MNB MNBH,NXF1 TAP,..,..,..,..
+DYRK1A DYRK MNB MNBH,NXF2,..,..,..,..
+DYRK1A DYRK MNB MNBH,PPP1R3F,..,..,..,..
+DYRK1A DYRK MNB MNBH,SLC8A1 CNC NCX1,1,..,"Called NCX1 in the paper, but proper name is the one assigned. Found in paper but not in ncbi gene interactions list.",..
+DYRK1A DYRK MNB MNBH,PRKACA PKACA,..,..,..,..
+DYRK1A DYRK MNB MNBH,PRKACB,..,..,..,..
+DYRK1A DYRK MNB MNBH,PRKAR1A PKR1 PRKAR1 TSE1,..,..,..,..
+DYRK1A DYRK MNB MNBH,PRKN PARK2,0,..,..,..
+DYRK1A DYRK MNB MNBH,RAD54L2 ARIP4 KIAA0809,..,..,together act synergistically. These effects are independent of the kinase activity of Dyrk1A,Hippocampus and cerebellum
+DYRK1A DYRK MNB MNBH,RB1,..,..,..,..
+DYRK1A DYRK MNB MNBH,RBL1,..,..,..,..
+DYRK1A DYRK MNB MNBH,RBL2 RB2,..,..,Component of the DREAM complex,..
+DYRK1A DYRK MNB MNBH,RFPL2 RNF79,..,..,..,..
+DYRK1A DYRK MNB MNBH,RNF169 KIAA1991,..,..,"putative RNF169, paper explains functional interaction but I can't download it",..
+DYRK1A DYRK MNB MNBH,SFN HME1,..,..,..,..
+DYRK1A DYRK MNB MNBH,SH3GL2 CNSA2 SH3D2A,..,..,Endophilin-1. It interacts with DYRK1A but it is not a substrate  http://sci-hub.tw/https://pubs.acs.org/doi/pdf/10.1021/bi9010557,..
+DYRK1A DYRK MNB MNBH,SYNJ1,0,..,synaptojanin 1,..
+DYRK1A DYRK MNB MNBH,SIPA1L1 E6TP1 KIAA0440,..,..,"Predicted, no evidence",..
+DYRK1A DYRK MNB MNBH,SMAD3 MADH3,..,..,..,..
+DYRK1A DYRK MNB MNBH,SRSF1 ASF SF2 SF2P33 SFRS1 OK/SW-cl.3,0,N to C,cytoplasmic translocation,..
+DYRK1A DYRK MNB MNBH,SRSF4 SFRS4 SRP75,..,N,"Interaction detected, no effect described",..
+DYRK1A DYRK MNB MNBH,SRSF5 HRS SFRS5 SRP40,..,..,"Interaction detected, no effect described",..
+DYRK1A DYRK MNB MNBH,SIRT1 SIR2L1,1,..,"phosphorylate human SIRT1 at T522, it increases the rate of product release by SIRT1",..
+DYRK1A DYRK MNB MNBH,TBC1D7 TBC7 HSPC239,..,..,..,..
+DYRK1A DYRK MNB MNBH,TBP GTF2D1 TF2D TFIID,..,..,..,..
+DYRK1A DYRK MNB MNBH,TRAF3 CAP1 CRAF1,..,..,..,..
+DYRK1A DYRK MNB MNBH,TRIM25 EFP RNF147 ZNF147,..,..,..,..
+DYRK1A DYRK MNB MNBH,TROAP,..,..,..,..
+DYRK1A DYRK MNB MNBH,TSC1 KIAA0243 TSC,1,..,"The study linked below mentions that there is an interaction between dyrk1a and TSC1 and that upon dyrk1a downregulation, mTOR substrates S6K1 and anoter were more phosphorylated. I searched for the connection between TSC1 and mTOR and what makes sense is that Dyrk1a is activating TSC1, which inhibits mTOR (S6K1 activator). So without Dyrk1a, mTOR is more activated and so are its substrates. http://cancerres.aacrjournals.org/content/75/15_Supplement/1022",..
+DYRK1A DYRK MNB MNBH,XPO1 CRM1,..,..,Binds to FOXO1 to promote nuclear exclusion of FOXO1,..
+DYRK1A DYRK MNB MNBH,NOTCH1 TAN1,0,N,Attenuation of Notch signalling by the Down-syndrome-associated kinase DYRK1A,..
+DYRK1A DYRK MNB MNBH,LIN37 MSTP064,..,..,DREAM complex,..
+DYRK1A DYRK MNB MNBH,RCAN1 ADAPT78 CSP1 DSC1 DSCR1,1,..,"Priming phosphorylation for GSK3  //  Dyrk1a phosphorylates the regulator of calcineurin 1 (RCAN) at Ser-112 and Thr-192 residues, the latter enhancing _ phosphorylation",..
+DYRK1A DYRK MNB MNBH,LIN9 BARA TGS,..,..,DREAM complex,..
+DYRK1A DYRK MNB MNBH,LIN54 CXCDC1 KIAA2037,..,..,DREAM complex,..
+DYRK1A DYRK MNB MNBH,RBBP4 RBAP48,..,..,DREAM complex,..
+DYRK1A DYRK MNB MNBH,PHYHIPL KIAA1796 UNQ6309/PRO20934,..,..,..,..
+DYRK1A DYRK MNB MNBH,TFDP1 DP1,..,..,DREAM complex,..
+DYRK1A DYRK MNB MNBH,E2F4,..,..,DREAM complex,..
+DYRK1A DYRK MNB MNBH,E2F5,..,..,DREAM complex,..
+DYRK1A DYRK MNB MNBH,TFDP2 DP2,..,..,DREAM complex,..
+DYRK1A DYRK MNB MNBH,MAPK1 ERK2 PRKM1 PRKM2,..,..,"ERK pathway is activated by Dyrk1a, but it is not explained which interactions take place https://link.springer.com/article/10.1007%2Fs12035-012-8326-1",..
+SPRED1,DYRK1A DYRK MNB MNBH,0,..,"Competitive binding to kinase domain. In the paper it is mentioned it affects the binding to Tau and STAT3, but I think this may apply to any protein Dyrk1a binds at its kinase domain",..
+SPRED2,DYRK1A DYRK MNB MNBH,0,..,"Competitive binding to kinase domain. In the paper it is mentioned it affects the binding to Tau and STAT3, but I think this may apply to any protein Dyrk1a binds at its kinase domain",..
+DYRK1A DYRK MNB MNBH,SPRY2,0,,These results suggest that the phosphorylation of Spry2 at Thr75 negatively modulates the ability of Spry2 to antagonize FGF-MAPK signaling.,..
+DYRK1A DYRK MNB MNBH,MAPT MAPTL MTBT1 TAU,0,..,Priming phosphorylation for GSK3  //  reduced the ability of tau to promote microtubule assembly,..
+DYRK1A DYRK MNB MNBH,HIST1H3I,..,..,..,..
+DYRK1A DYRK MNB MNBH,HRAS HRAS1,..,..,Up-regulating the Ras/MAP kinase signaling pathway independently of its kinase activity,..
+DYRK1A DYRK MNB MNBH,GYS1 GYS,..,..,..,..
+DYRK1A DYRK MNB MNBH,"SMARCA4 BAF190A, BRG1, SNF2B, SNF2L4",..,..,DYRK1A interacts with the REST/NRSF-SWI/SNF complex,..
+DYRK1A DYRK MNB MNBH,E2F1 RBBP3,..,..,E2F1 increased DYRK1A mRNA levels in Saos2 and Phoenix cells  //  DYRK1A expression can be enhanced by treatment with _-amyloid or overexpression of the transcription factor E2F1,..
+DYRK1A DYRK MNB MNBH,NFATC2 NFAT1 NFATP,0,N to C,DYRK1A acts as a priming kinase that enables additional phosphorylation of NFAT by CK1 and GSK-3 leading to NFAT inactivation  ,..
+DYRK1A DYRK MNB MNBH,SPRY4,..,..,..,..
+LATS2 KPM,DYRK1A DYRK MNB MNBH,1,..,it enhances the ability of DYRK1A to phosphorylate the DREAM subunit LIN52,..
+DYRK1A DYRK MNB MNBH,GRIN2A NMDAR2A,..,..,Also called GluN2A.  https://www.ncbi.nlm.nih.gov/pubmed/25368549,Hippocampus
+DYRK1A DYRK MNB MNBH,PSEN1 AD3 PS1 PSNL1,1,..,"phosphorylation at Thr-354 residue of presenilin 1 (PS1), a key component of the _-secretase complex, also induced an increased _-secretase activity",..
+DYRK1A DYRK MNB MNBH,SEPT4 ARTS PNUTL2 SEP4 hucep-7,..,..,Phosphorylation of septin-4 (SEPT-4) at Ser-68 and Ser-107 residues by DYRK1A may regulate specific protein_protein interactions  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4052305/,neocortical neurons
+DYRK1A DYRK MNB MNBH,SRSF6 SFRS6 SRP55,0,..,dissociation from nuclear speckles,..
+DYRK1A DYRK MNB MNBH,CASP9 MCH6,0,..,phosphorylation of caspase-9 on threonine residue 125,Retina
+DYRK1A DYRK MNB MNBH,HIP1,0,..,blockade of Hip-1-mediated neuronal cell death,embryonic hippocampal neuroprogenitor (H19-7) cells
+DYRK1A DYRK MNB MNBH,WASL,1,..,"Also called N-WASP  //  These  results  strongly  indicatethatDyrk1A-mediatedThr259phosphorylationpromotesintramolecular interaction between the GBD and VCA domainsof   N-WASP",..
+DYRK1A DYRK MNB MNBH,SRSF10 FUSIP1 FUSIP2 SFRS13A TASR,..,..,..,..
+DYRK1A DYRK MNB MNBH,SMARCB1 BAF47 INI1 SNF5L1,..,..,DYRK1A interacts with the REST/NRSF-SWI/SNF complex,..
+DYRK1A DYRK MNB MNBH,SRSF2 SFRS2,0,..,dissociation from nuclear speckles,..
+DYRK1A DYRK MNB MNBH,KRAS KRAS2 RASK2,..,..,..,..
+DYRK1A DYRK MNB MNBH,BRAF BRAF1 RAFB1,..,..,..,..
+DYRK1A DYRK MNB MNBH,NFATC4 NFAT3,0,N to C,DYRK1A acts as a priming kinase that enables additional phosphorylation of NFAT by CK1 and GSK-3 leading to NFAT inactivation  ,..
+DYRK1A DYRK MNB MNBH,TRA2B SFRS10,..,..,..,..
+DYRK1A DYRK MNB MNBH,GSK3B,0,..,Phosphorylation and Inactivation of Glycogen Synthase Kinase 3_ (GSK3_) by Dual-specificity Tyrosine Phosphorylation-regulated Kinase 1A (Dyrk1A),..
+DYRK1A DYRK MNB MNBH,SPRED2,0,..,..,..
+DYRK1A DYRK MNB MNBH,CRY2,0,..,Priming phosphorylation that leads to degradation https://www.ncbi.nlm.nih.gov/pubmed/20123978,..
+DYRK1A DYRK MNB MNBH,YWHAH YWHA1,..,..,..,..
+DYRK1A DYRK MNB MNBH,MAP2K1 MEK1 PRKMK1,..,..,..,..
+DYRK1A DYRK MNB MNBH,STAT3 APRF,1,..,"Overexpression of DYRK1A in wild-type progenitors increases STAT3 phosphorylation at Ser727, a regulatory site that enhances STAT3 activity  //  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4641506/",..
+DYRK1A DYRK MNB MNBH,H3F3A H3.3A H3F3 PP781; H3F3B H3.3B,..,..,..,..
+DYRK1A DYRK MNB MNBH,CLASRP SFRS16 hCG_22138,..,..,..,..
+DYRK1A DYRK MNB MNBH,HIST2H3A HIST2H3C H3F2 H3FM; HIST2H3D,..,..,..,..
+DYRK1A DYRK MNB MNBH,SPRY1,..,..,"Confirmed interaction, but does not specify how they interact",..
+DYRK1A DYRK MNB MNBH,EIF2B5 EIF2BE,0,..,"Priming phosphorylation for GSK3  // GSK3 inactivates EIF2bEpsilon, a subunit of EIF2B, by phosphorylating its Ser535",..
+DYRK1A DYRK MNB MNBH,GRB2 ASH,..,..,"Confirmed interaction, but does not specify how they interact",..
+DYRK1A DYRK MNB MNBH,MAP1B,1,..,Priming phosphorylations,..
+DYRK1A DYRK MNB MNBH,YWHAQ,..,..,..,..
+DYRK1A DYRK MNB MNBH,YWHAZ,..,..,..,..
+DYRK1A DYRK MNB MNBH,NRAS HRAS1,..,..,..,..
+DYRK1A DYRK MNB MNBH,POLR2A,..,..,..,..
+DYRK1A DYRK MNB MNBH,SPRED3 EVE-3,..,..,..,..
+"BTRC BTRCP, FBW1A, FBXW1A",DYRK1A DYRK MNB MNBH,0,..,Substrate recognition component of a SCF (SKP1-CUL1-F-box protein) E3 ubiquitin-protein ligase complex  //  Promotes degradation //  E3 ligase SCF_TrCP mediates ubiquitination ,HEK293 cells
+EGLN2 EIT6 ,DYRK1A DYRK MNB MNBH,1,..,"oxygen-sensing prolyl hydroxylase PHD1 (also known as EGLN2)  //  DYRK1, whose activity is stimulated in normoxia by the oxygen sensing prolyl hydroxylase PHD1",..
+DYRK1A DYRK MNB MNBH,"DPYSL3 CRMP4, DRP3, ULIP, ULIP1",0,..,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3308858/,..

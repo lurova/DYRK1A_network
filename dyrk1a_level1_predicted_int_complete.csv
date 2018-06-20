@@ -1,0 +1,95 @@
+V1,V2,Effect,Location,Description
+SIRT1 SIR2L1,CDKN1B KIP1,0,..,..
+CCND1 BCL1 PRAD1,CDKN1B KIP1,..,N to C,The phoshporylation of Ser10 by Cyclin D1 promotes the translocation from the nucleus to the cytoplasm // p27 from proliferating cells was noninhibitory but that p27 from arrested cells was inhibitory  http://mcb.asm.org/content/28/1/498.full
+SRSF6 SFRS6 SRP55,SRSF1 ASF SF2 SF2P33 SFRS1 OK/SW-cl.3,..,..,..
+YWHAE,CDKN1B KIP1,0,..,14-3-3_ deletion leads to significant accumulation of cardiomyocytes in the G0/G1phase by upregulation of p27Kip1¾and downregulation of Cyclin E1
+CDKN1B KIP1,YWHAE,0,..,"14-3-3 binding to p27Kip1 by phosphorylation at Thr198, allowing its cytoplasmic localization and degradation http://www.jbc.org/content/277/32/28706.long"
+SIRT1 SIR2L1,STAT3 APRF,0,..,"SIRT1, interact with STAT3 and negatively regulate its transcriptional activity, through deacetylation of key STAT3 lysine residues"
+CCND1 BCL1 PRAD1,STAT3 APRF,0,..,"cyclin D1 did bind to the transcriptional activation domain of STAT3, suggesting a mechanism whereby STAT3-dependent transcription could be immediately attenuated.  //  cyclin D1 was found to associate with the activation domain of STAT3 upon IL-6 stimulation"
+CDKN1B KIP1,STAT3 APRF,..,..,"Downregulation mediated by another molecule, no direct interaction"
+CCND1 BCL1 PRAD1,NOTCH1 TAN1,0,..,"JAG1 down-regulation reduces direct binding of Notch to theæcyclin D1æpromoter, reduced cyclin D1 expression and inhibition of cell cycle progression https://link.springer.com/article/10.1007/s10549-009-0621-9"
+GLI1 GLI,NOTCH1 TAN1,..,..,..
+STAT3 APRF,NOTCH1 TAN1,..,..,"Mediated by Hes proteins, not direct interaction"
+YWHAE,TSC1 KIAA0243 TSC,..,..,They are known not to interact
+YWHAB,CDKN1B KIP1,0,..,"14-3-3 was found to recognize specifically Thr157-phosphorylated p27NLS and prevented it from binding to importin _, resulting in the inhibition of nuclear import of p27."
+YWHAE,YWHAB,..,..,..
+TSC1 KIAA0243 TSC,YWHAB,..,..,"14-3-3 beta interacts with TSC2, not TSC1. TSC1/2 form a complex http://www.jbc.org/content/278/4/2089.full"
+GSK3B,CCND1 BCL1 PRAD1,0,N,"Phosphorylation of cyclin D1 on Thr286 by GSK-3_ facilitates its association with CRM1, which is a nuclear protein that mediates the nuclear export of proteins, resulting in the exclusion of cyclin D1 from the nucleus to initiate its proteasomal degradation"
+CCND1 BCL1 PRAD1,GSK3B,..,..,..
+GSK3B,GLI1 GLI,0,..,Gsk3_ serves as a negative kinase regulator of Gli1  //  Gsk3_ act as bipotential in regulation of Gli1. It acts as a negative regulator (by phosphorylating Gli and promote its degradation)
+GLI1 GLI,GSK3B,..,..,..
+YWHAE,GSK3B,..,..,..
+YWHAB,GSK3B,0,..,14-3-3_ binds to GSK3_ and inhibits GSK3_ activity https://www.spandidos-publications.com/or/30/6/2976
+GSK3B,NOTCH1 TAN1,1,..,https://www.sciencedirect.com/science/article/pii/S0960982202008886
+NOTCH1 TAN1,GSK3B,..,..,..
+GSK3B,APP A4 AD1,..,..,"Increasing evidence suggests that in AlzheimerÍs disease pathogenesis, elevated GSK3_ activity is a key event in abnormal APP processing, increased A_ production, and hyperphosphorylation of tau. Amyloid beta-induced GSK3_ is associated with mitochondrial dysfunction via the phosphorylation of VDAC1 and dissociation of heoxokinases with VDAC1 in AlzheimerÍs disease. Elevated GSK3_ further activate abnormal APP processing, leading to increased A_ production, and hyperphosphorylation of tau, like vicious cycle.æ"
+APP A4 AD1,GSK3B,0,..,"AICD, a fragment from APP, directly interacts with GSK3B. Decreased phosphorylation, which means higher activity of Gsk3b, but it is mediated by the PI3-kinase signalling pathway https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3073119/"
+GSK3B,MAP1B,0,..,"Phosphorylation in Ser1388,  serine 1260, threonine 1265 // It promotes microtubule instability"
+MAP1B,GSK3B,..,..,..
+GSK3B,TSC1 KIAA0243 TSC,1,..,Gsk3 phosphorylates TSC1. The phosphorylation promotes the formation of the complex TSC1-TSC2  https://www.ncbi.nlm.nih.gov/pmc/articles/PMC1603434/
+TSC1 KIAA0243 TSC,GSK3B,..,..,..
+PSEN1 AD3 PS1 PSNL1,NOTCH1 TAN1,1,..,"Presenilin-1 mediates the S3 cleavage of Notch1, which releases the intracellular part that then can go into the nucleus"
+NOTCH1 TAN1,PSEN1 AD3 PS1 PSNL1,..,..,..
+PSEN1 AD3 PS1 PSNL1,APP A4 AD1,..,..,Presenilin is the catalytic component of the _-secretase complex that cleavages APP. //  Presenilin-1 promotes the formation of AB plaques
+APP A4 AD1,PSEN1 AD3 PS1 PSNL1,..,..,..
+PSEN1 AD3 PS1 PSNL1,GSK3B,1,..,"OPPOSITE RESULTS, DEPENDING ON DIRECT OR INDIRECT INTERACTION: Psen1 increases the ability of GSK3b to phosphorylate Tau (https://www.ncbi.nlm.nih.gov/pubmed/9689133) but inhibits it through PI3k/Akt (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC449766/)"
+GSK3B,PSEN1 AD3 PS1 PSNL1,0,..,"Glycogen synthase kinase 3-mediated phosphorylation of Presenilin 1 reduces its binding to N-cadherin, thereby down-regulating its cell-surface expression. Moreover, reduction of the Presenilin 1N-cadherin-catenin complex formation leads to an impaired activation of contact-mediated phosphatidylinositol 3-kinase/Akt cell survival signaling. Furthermore, phosphorylation of Presenilin 1 hinders -cleavage of N-cadherin (http://www.jbc.org/content/282/21/15823.full.pdf)"
+NFATC1 NFAT2 NFATC,RCAN1 ADAPT78 CSP1 DSC1 DSCR1,1,..,RCAN1 is a target gene of NFAT (transcription factor)
+RCAN1 ADAPT78 CSP1 DSC1 DSCR1,NFATC1 NFAT2 NFATC,..,..,..
+GSK3B,NFATC1 NFAT2 NFATC,0,..,Able to phosphorylate and inhibit NFAT proteins (from c1 to c4 and NFAT5) after priming phosphorylation by DYRK1A
+SRSF6 SFRS6 SRP55,SF3B1 SAP155,..,..,..
+SRSF1 ASF SF2 SF2P33 SFRS1 OK/SW-cl.3,SF3B1 SAP155,..,..,..
+APP A4 AD1,SNCA NACP PARK1,0,..,..
+APP A4 AD1,MAPT MAPTL MTBT1 TAU,..,..,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4305093/
+GSK3B,MAPT MAPTL MTBT1 TAU,0,..,"by phosphorylating and inactivating glycogen synthase (GYS1 or GYS2), EIF2B, CTNNB1/beta-catenin, APC, AXIN1, DPYSL2/CRMP2, JUN, NFATC1/NFATC, MAPT/TAU and MACF1"
+PSEN1 AD3 PS1 PSNL1,MAPT MAPTL MTBT1 TAU,0,..,PSEN1 binds GSK3B and MAPT and promotes the phosphorylation of TAU by GSK3B
+SNCA NACP PARK1,MAPT MAPTL MTBT1 TAU,0,..,"Does increased formation of fibrillary tangles count as activation or not (of Tau and a-synuclein)? I have read: ""_-syn can itself serve as a cofactor to promote tau polymerization and both proteins co-localize within inclusion bodies"" and ñWe demonstrate that alpha-syn induces fibrillization of tau and that coincubation of tau and alpha-syn synergistically promotes fibrillization of both proteinsî //  Coincubation of a-synuclein and tau induces the polymerization of both proteins (http://science.sciencemag.org/content/300/5619/636/tab-pdf) //   I have also read ""his _-synuclein/Tau association seems functional because it leads to enhanced protein kinase A-mediated Tau phosphorylation"" (http://pharmrev.aspetjournals.org/content/54/3/469.long)"
+PSEN1 AD3 PS1 PSNL1,SNCA NACP PARK1,0,..,PSEN1 promotes the pathogenic phosphorylation and aggregation of a-synuclein 
+GSK3B,DPYSL3 CRMP4 DRP3 ULIP ULIP1,0,..,http://www.jneurosci.org/content/30/16/5635.long
+AMPH AMPH1,WASL,1,..,SHORT NAME IS N-WASP!!!  //  amphiphysin 1 interacts with N-WASP and stimulates N-WASP- and Arp2/3-dependent actin polymerization (https://www.ncbi.nlm.nih.gov/pubmed/19759398)
+WASL,AMPH AMPH1,..,..,..
+AMPH AMPH1,CLTC CLH17 CLTCL2 KIAA0034,1,,Amph1 promotes the formation of endosomes and phagosomes (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2043535/)
+CLTC CLH17 CLTCL2 KIAA0034,AMPH AMPH1,..,,
+SRSF6 SFRS6 SRP55,SRSF2 SFRS2,..,,
+SRSF1 ASF SF2 SF2P33 SFRS1 OK/SW-cl.3,SRSF2 SFRS2,..,,
+SF3B1 SAP155,SRSF2 SFRS2,..,,
+PRKN PARK2,SNCA NACP PARK1,0,,ubiquitination leads to degradation of synuclein (https://www.cell.com/trends/neurosciences/fulltext/S0166-2236(00)02022-1)
+SNCA NACP PARK1,PRKN PARK2,..,,
+BTRC BTRCP FBW1A FBXW1A,GLI1 GLI,0,,ubiquitination and degradation (https://www.ncbi.nlm.nih.gov/pubmed/28562331)
+GLI1 GLI,BTRC BTRCP FBW1A FBXW1A,..,,
+BTRC BTRCP FBW1A FBXW1A,REST NRSF XBR,0,,ubiquitination from BTRC leads to degradation of REST (https://www.ncbi.nlm.nih.gov/pubmed/18354483)
+REST NRSF XBR,BTRC BTRCP FBW1A FBXW1A,..,,
+BTRC BTRCP FBW1A FBXW1A,GSK3B,AAA,,Interaction does not affect function of Gsk3b (http://www.jbc.org/content/289/10/7099.full)
+GSK3B,BTRC BTRCP FBW1A FBXW1A,AAA,,Interaction does not affect function of Gsk3b (http://www.jbc.org/content/289/10/7099.full)
+NOTCH1 TAN1,DNM1 DNM,..,,"Somehow they are expression dependent, but the interaction is not described"
+AMPH AMPH1,DNM1 DNM,1,,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC516627/
+FOXO1 FKHR FOXO1A,SIRT1 SIR2L1,1,..,FOXO1 is a positive transcriptional regulator of SIRT1
+SIRT1 SIR2L1,FOXO1 FKHR FOXO1A,0,..,Mammalian SIRT1 represses forkhead transcription factors
+CCND1 BCL1 PRAD1,FOXO1 FKHR FOXO1A,0,,cyclin D1 interacts with both FOXO1 and FOXO3a and inhibits their transcriptional activity and anoikis-promoting function (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3071150/)
+FOXO1 FKHR FOXO1A,CDKN1B KIP1,1,,Transcription of the CDKN1B gene is activated by Forkhead box class O family (FoxO) proteins
+CDKN1B KIP1,FOXO1 FKHR FOXO1A,..,,https://www.ncbi.nlm.nih.gov/pubmed/18787071
+STAT3 APRF,FOXO1 FKHR FOXO1A,1,,"STAT3 binds to inactive FOXO1 in the cytoplasm. Upon inactivation of STAT3, FOXO1 is translocated to the cytoplasm. (https://www.ncbi.nlm.nih.gov/pubmed/22761423)"
+FOXO1 FKHR FOXO1A,NOTCH1 TAN1,1,,"FOXO1 interacts with NOTCH1 promoter region, inducing/increasing its expression"
+NOTCH1 TAN1,FOXO1 FKHR FOXO1A,..,,
+YWHAE,FOXO1 FKHR FOXO1A,0,,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3851013/       http://jcs.biologists.org/content/joces/early/2015/08/07/jcs.171876.full.pdf
+YWHAB,FOXO1 FKHR FOXO1A,..,,
+GSK3B,FOXO1 FKHR FOXO1A,1,,GSK3_ interacts with both HNF4_ and FOXO1. It activates FOXO1 https://www.tandfonline.com/doi/abs/10.3109/10799893.2012.660531?journalCode=irst20
+YWHAE,LATS2 KPM,..,,LATS2 promotes the interaction between 14-3-3_ and TAZ by phosphorylation of the latter.
+YWHAB,LATS2 KPM,..,,
+GSK3B,NFATC2 NFAT1 NFATP,0,,Able to phosphorylate and inhibit NFAT proteins (from c1 to c4 and NFAT5) after priming phosphorylation by DYRK1A
+NFATC1 NFAT2 NFATC,NFATC2 NFAT1 NFATP,..,,
+CCND1 BCL1 PRAD1,CREB1,..,,
+GSK3B,CREB1,0,,https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4340754/
+CREB1,PSEN1 AD3 PS1 PSNL1,1,,CREB binds to the proximal promoter of the human presenilin-1 (PS-1) gene to activate PS-1 transcription in rat and in human neuronal cells. (http://www.jbc.org/content/276/13/9688.full)
+PSEN1 AD3 PS1 PSNL1,CREB1,..,,
+CREB1,FOXO1 FKHR FOXO1A,1,,It estimulates the proliferative capacity of FOXO1. They bind directly. Osteoblast proliferation. (https://www.jci.org/articles/view/64906)
+FOXO1 FKHR FOXO1A,CREB1,..,,
+BTRC BTRCP FBW1A FBXW1A,CRY2,..,,
+SYNJ1,CLTC CLH17 CLTCL2 KIAA0034,1,,Clathrin coated endocytosis. (https://www.sciencedirect.com/science/article/pii/S0960982200004462?via%3Dihub)  //  promoting the uncoating of clathrin following synaptic vesicle uptake (https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4995302/)
+CLTC CLH17 CLTCL2 KIAA0034,SYNJ1,..,,
+AMPH AMPH1,SYNJ1,AAA,,
+DNM1 DNM,SYNJ1,1,,
+CDKN1B KIP1,CCND1 BCL1 PRAD1,1,,"Mitogens other than EGF, including bFGF, PDBu and serum, also induced increases in the mRNA and protein levels of cyclin D1 in NIH 3T3(M17) cells"
+NOTCH1 TAN1,CCND1 BCL1 PRAD1,0,,Degradation after priming by Dyrk1a and GSK3B phosphorylation
+GSK3B,CRY2,0,," GSK3 inactivates EIF2bEpsilon, a subunit of EIF2B, by phosphorylating its Ser535"
+GSK3B,EIF2B5 EIF2BE,0,,GSK3_ and -_ are involved in phosphorylation of and inhibition of eIF2B5 (http://www.jbc.org/content/288/32/23331.full)

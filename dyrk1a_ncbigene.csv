@@ -1,0 +1,88 @@
+Input,Output,Effect,Location,Information
+DYRK1A,GLI1,1,..,..
+DYRK1A,CREB1,1,N,"Dyrk1a phosphorylates CREB, inducing CRE-dependent gene expression. Activation then?"
+DYRK1A,PHYHIPÊ,..,C,..
+DYRK1A,CCNL2,1,N,Phosphorylation (regulation of splicing) //  inducing apoptosis by modulating the expression of apoptotic and antiapoptotic proteins // phosphorylation of SR proteins is necessary for their recruitment from nuclear speckles to sites of transcription/pre-mRNA processing
+DYRK1A,CDKN1B,1,..,The protein is p27. Phosphorylation at Ser10  (stabilization of the protein) //  Encoded by gene CDKN1B (cyclin dependent kinase inhibitor 1B)
+DYRK1A,DYRK1A,1,..,..
+DYRK1A,FOXO1,0,N,Phosphorylation at Ser329  //  Forkhead box protein O1
+DYRK1A,SF3B1,1,..,"Phosphorylation  //  It is mentioned that SF3b1 must be phosphorylated to be active, so I assume that this phosphorylation from Dryk1a activates it"
+DYRK1A,ABCD3Ê,..,..,ATP-binding cassette sub-family D member 3
+DYRK1A,DNM1,0,..,dynamin 1
+DYRK1A,AMPHÊ,0,..,Phosphorylation.  //  Amphiphysin
+DYRK1A,APP,1,..,Phosphorlation promotes the cleavage of APP.
+DYRK1A,BARD1Ê,..,..,..
+DYRK1A,BRCA1,..,..,..
+DYRK1A,C10orf71 ,..,..,This is an open reading frame ???
+DYRK1A,CCDC8 ,..,..,..
+DYRK1A,CCNA2Ê,..,..,..
+DYRK1A,CLTCÊ,0,..,Clathrin heavy chain  //  Possible dissociation from the clathrin coated vesicles
+DYRK1A,CREBBP,..,..,"Substrate candiate, nature of the interaction not mentioned"
+DYRK1A,DCAF7Ê,1,..,DYRK1A/DCAF7 complex  // Protein Han11
+DYRK1A,DYNLL1Ê,..,..,"dynein, light chain, LC8-type 1"
+DYRK1A,DYNLL2,..,..,"dynein, light chain, LC8-type 2"
+DYRK1A,ID2,0,..,Phosphorylation in Thr27
+DYRK1A,EP300Ê,..,..,..
+DYRK1A,FAM117AÊ,..,..,..
+DYRK1A,FAM117B,..,..,..
+DYRK1A,FAM53C,..,..,..
+DYRK1A,FNTA,..,..,..
+DYRK1A,FNTB,..,..,..
+DYRK1A,FOXR2Ê,..,..,..
+DYRK1A,TP53,..,..,..
+DYRK1A,GLCCI1Ê,..,..,..
+DYRK1A,HIPK2,..,..,Direct interaction if Han11 (DCAF7) is absent
+DYRK1A,NFATC1,0,..,In the paper it is called NFAT or NFATc.  //  rules: not DYRK1A and not MAP3K1
+DYRK1A,CCND1,0,..,Phosphorylation at Thr286 (degradation)  //  Cyclin D1 inhibits p27 (above).   
+DYRK1A,REST,0,..,DYRK1A promotes instability of REST.
+REST,DYRK1A,1,,REST activates DYRK1A transcription. Negative feedback loop
+DYRK1A,DDB1,..,..,..
+DYRK1A,CUL9,..,..,..
+DYRK1A,HIST1H2BBÊ,..,..,..
+DYRK1A,HIST1H3A,..,..,..
+DYRK1A,HIST1H4AÊ,..,..,..
+DYRK1A,KIAA0232Ê,..,..,Uncharacterized protein KIAA0232
+DYRK1A,LIN52,1,..,"phosphorylation of LIN52 promoting the formation of the repressor complex // phosphoration on LIN52ser28, necessary for DREAM asembly"
+DYRK1A,LIPH,..,..,predicted interaction
+DYRK1A,LRCH3,..,..,interaction 30% confirmed
+DYRK1A,MMEL1,0,..,..
+DYRK1A,LZTS2,..,..,..
+DYRK1A,SNCA,1,..,_-synuclein
+DYRK1A,MAP3K5,1,..,"Also called ASK1. Positively regulates p38 and JNK pathway. Activators: TNF receptor-ssociated factors 2/6, Daxx.Inhibitors: thioredoxin, Hsp90, 14-3-3"
+DYRK1A,MED23Ê,..,..,"Interaction reported, but not the effect"
+DYRK1A,MOV10,..,..,..
+DYRK1A,NTRK1Ê,..,..,Encodes TrkA.
+DYRK1A,NXF1,..,..,..
+DYRK1A,NXF2Ê,..,..,..
+DYRK1A,PPP1R3FÊ,..,..,..
+DYRK1A,PRD,..,..,"In the paper, PRD stands for Proline-rich domain or X-linked primary retinal dysplasia"
+DYRK1A,SLC8A1,1,..,"Called NCX1 in the paper, but proper name is the one assigned. Found in paper but not in ncbi gene interactions list."
+DYRK1A,PRKACA,..,..,..
+DYRK1A,PRKACB,..,..,..
+DYRK1A,PRKAR1AÊ,..,..,..
+DYRK1A,PARK2,0,..,..
+DYRK1A,RAD54L2Ê,..,N,Also called ARIP4 //  the effect of Dyrk1A on Arip4  is not mediated by phosphorylation
+DYRK1A,RB1Ê,..,..,..
+DYRK1A,RBL1,..,..,..
+DYRK1A,RBL2,..,..,DREAM complex subunit p130
+DYRK1A,RFPL2Ê,..,..,..
+DYRK1A,RNF169,..,..,..
+DYRK1A,SFNÊ,..,..,..
+DYRK1A,SH3GL2Ê,..,..,"endophilin 1, Cited paper says ""our results indicate that neither clathrin heavychain nor endophilin 1 is a substrate for the kinase"" and ""One more Dyrk1A bindingprotein, endophilin 1, was found during the study"""
+DYRK1A,SYNJ1,0,..,synaptojanin 1
+DYRK1A,SIPA1L1,..,..,..
+DYRK1A,SMAD3,..,..,..
+DYRK1A,SRSF1,..,..,SF2/ASF
+DYRK1A,SRSF4,..,..,..
+DYRK1A,SRSF5,..,..,..
+DYRK1A,SIRT1,1,..,..
+DYRK1A,TBC1D7Ê,..,..,..
+DYRK1A,TBP,..,..,..
+DYRK1A,TRAF3Ê,..,..,..
+DYRK1A,TRIM25Ê,..,..,..
+DYRK1A,TROAP,..,..,..
+DYRK1A,TSC1,..,..,..
+DYRK1A,XPO1Ê,..,N,CRM1
+YWHABÊ,DYRK1A,1,..,14-3-3 protein beta/alpha  //  In the paper it is mentioned the interaction with 14-3-3_ //  Ser520 phosphorylated is required
+YWHAEÊ,DYRK1A,1,N,14-3-3 protein epsilon
+YWHAG,DYRK1A,..,..,14-3-3 protein gamma

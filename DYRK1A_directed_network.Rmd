@@ -1,0 +1,523 @@
+---
+title: "Dyrk1a directed network"
+author: "Lucía_Rodríguez"
+date: "March 22, 2018"
+output:
+  html_document:
+    toc: true
+    toc_depth: 5
+    toc_float: true
+    collapsed: true
+    smooth_scroll: true
+
+---
+
+```{r setup, include=FALSE}
+library(knitr) #file formatting
+opts_chunk$set(echo=FALSE, warning=FALSE, message=FALSE, comment=NA, message=FALSE,width=700)
+```
+
+Dual specificity tyrosine phosphorylation regulated kinase 1A (DYRK1A) has many protein interactors. Most of them are substrates that DYRK1A phosphorylates to regulate their activity. Information about these interactions can be found in the literature. However, many of these studies don't characterise the effect that the phosphorylation has on the substrate, and therefore on the respective pathway.
+In this report, I will search for the proteins that interact with DYRK1A and, if possible, I will also indicate if this kinase acts as a positive or a negative regulator.
+
+
+# Where do I find the information?
+I have used bioinformatic tools and I have also done a manual search of the proteins in the literature. The best tool available to find the interactions is the R package **STRINGdb**. This package contains all the interactions between proteins and it is possible to make different kinds of related searches. This information is retrieved from databases, experiments, co-expression of the proteins, neighborhood, gene fusion, co-ocurrence and textmining. Depending on the source of information, the interaction between two proteins is assigned a score that ranges between 0 and 1000. The higher the score is, the more likely it is the interaction is true. It is possible to set a threshold and retrieve the interations that score above it. In this report, the **threshold** is **900**.  
+Regarding the manual retrieval, I obtained DYRK1A interactions from Gene (NCBI), Duchon et Herault and Aranda et al.
+
+```{r Libraries}
+library(biomaRt)
+library(UniProt.ws)
+library(igraph)
+library(STRINGdb)
+```
+
+```{r Objects, cache=TRUE}
+# Loading objects for future use
+# biomaRt
+homosp <- useMart("ensembl", dataset = "hsapiens_gene_ensembl")
+mouse <- useMart("ensembl", dataset = "mmusculus_gene_ensembl")
+
+# Uniprot.ws
+up <- UniProt.ws(taxId = 9606)
+up_mouse <- UniProt.ws(taxId = 10090)
+```
+
+```{r STRINGdb}
+
+# STRINGdb
+string_db <- STRINGdb$new(version="10", species=9606, score_threshold=0, input_directory="" )
+string_db900 <- STRINGdb$new(version="10", species=9606, score_threshold=900, input_directory="" )
+
+# Dyrk1a basic information
+dyrk1a_df <- data.frame(symbol="DYRK1A", ensembl_gene_id="ENSG00000157540") # Dataframe with DYRK1A ids
+dyrk1a_df <- string_db900$map(dyrk1a_df, "ensembl_gene_id", removeUnmappedRows = FALSE) # Getting STRINGid
+
+# Protein names to look for in the reported pubmed
+proteins0 <- string_db$get_proteins()
+proteins900 <- string_db900$get_proteins()
+```
+
+```{r Loading_DYRK1A_interactors_STRINGdb}
+# STRINGdb
+dyrk1a_strdb <- string_db900$get_neighbors(dyrk1a_df$STRING_id) # DYRK1A interactors
+dyrk1a_strdb <- data.frame(ensembl_peptide_id=unlist(lapply(dyrk1a_strdb, function(x) unlist(strsplit(x, "\\."))[2]))) # Ensembl peptide ids of DYRK1A interactors
+dyrk1a_strdb$GENES <- proteins0$preferred_name[proteins0$protein_external_id %in% paste("9606",dyrk1a_strdb$ensembl_peptide_id,sep = ".")] # Protein names of the DYRK1A interactors retrieved with STRINGdb
+
+```
+
+```{r Loading_DYRK1A_interactors_NCBIGene}
+# NCBI GENE ## IT ALREADY HAS INTERACTIONS DESCRIBED, but I will run the proteins together with the ones I am obtaining from other sources
+csv_file <- read.csv(file="dyrk1a_ncbigene.csv", header = TRUE, sep = ",")
+# Names wrong due to conversion from excel to csv (I am guessing this from a warning I got)
+csv_file$Input <- unlist(lapply(as.character(csv_file$Input), function(x){ gsub("\xca", "", x) }))
+csv_file$Output <- unlist(lapply(as.character(csv_file$Output), function(x){ gsub("\xca", "", x) }))
+
+# Completing csv_file info with ensembl peptide ids
+csv_file_prots <- data.frame(GENES=unique(c(csv_file$Input, csv_file$Output)))
+csv_file_prots$STRING_id <- NA
+
+for(i in 1:nrow(csv_file_prots)){
+  to_add <- proteins0$protein_external_id[proteins0$preferred_name == csv_file_prots$GENES[i]]
+  if(length(to_add) != 0){csv_file_prots$STRING_id[i] <- to_add}
+}
+
+# Manually adding missing ensp
+csv_file_no_ensp <- csv_file_prots[which(is.na(csv_file_prots$STRING_id)),]
+
+# I am keeping CCDC8 and removing PRD and C10orf71 (they are not proteins).
+csv_file_prots$STRING_id[csv_file_prots$GENES=="CCDC8"] <- "ENSP00000303158"
+csv_file_prots <- csv_file_prots[-which(is.na(csv_file_prots$STRING_id)),]
+# which(is.na(csv_file_prots$STRING_id))
+
+# Column wit ensembl_peptide_id
+csv_file_prots$ensembl_peptide_id <- unlist(lapply(csv_file_prots$STRING_id, function(x){unlist(strsplit(x, "\\."))[2]}))
+```
+
+```{r Loading_DYRK1A_interactors_lab_file}
+# LAB FILE DYRK1A_TARGETS from Aranda et al. and Duchon et Herault
+load("dyrk1a_targets.R")
+
+# Conversion from mouse to human identifiers
+mouse2human <- getLDS(attributes=c("uniprotswissprot"), filters="uniprotswissprot", values=dyrk1a_targets, mart=mouse, attributesL=c("uniprotswissprot"), martL=homosp)
+colnames(mouse2human) <- c("uniprotswissprot_mouse", "uniprotswissprot_homosp")
+ 
+# Checking which uniprotswissprot were not mapped and manually convert from mouse to human uniprot id
+unmapped_uniprot <- dyrk1a_targets[which(!dyrk1a_targets %in% mouse2human$uniprotswissprot_mouse)] # Not mapped
+mouse2human <- rbind(mouse2human, data.frame(uniprotswissprot_mouse=unmapped_uniprot, uniprotswissprot_homosp=c("P27348", "P63104", "Q9Y4B4", "O95644", "P01111", "O75533", "Q08170", "Q13243", "O43426", "P24928", "Q00610", "Q96S94", "Q08170", "Q2MJR0", "P62995")))
+
+# To be able to retrieve the PUBMED ids later, I need the STRINGid of the proteins
+dyrk1a_targets_names <- string_db$map(mouse2human, "uniprotswissprot_homosp", removeUnmappedRows = FALSE)
+# Manual retrieval of missing STRINGids
+dyrk1a_targets_names$STRING_id[dyrk1a_targets_names$uniprotswissprot_homosp=="Q71DI3"] <- "9606.ENSP00000385479"
+dyrk1a_targets_names$STRING_id[dyrk1a_targets_names$uniprotswissprot_homosp=="O00291"] <- "9606.ENSP00000336747"
+
+# Adding ensembl_peptide_id
+dyrk1a_targets_names$ensembl_peptide_id <- unlist(lapply(dyrk1a_targets_names$STRING_id, function(x) { unlist(strsplit(x, "\\."))[2] }))
+
+# Adding gene name
+dyrk1a_targets_names$GENES <- unlist(lapply(dyrk1a_targets_names$STRING_id, function(x){proteins0$preferred_name[proteins0$protein_external_id == x]}))
+
+# # Creating csv file to add in/activation of dyrk1a_targets_names
+# write.csv(dyrk1a_targets_names, file = "dyrk1a_interactors_labfile.csv", row.names = FALSE)
+```
+
+Several DYRK1A interactors from the lab file map to the same human homolog protein. That is, we obtain duplicated UniprotKb ids. They will be removed.
+
+```{r Overlapping_interactors_from_different_sources}
+# Overlapping interactors from different sources to avoid duplicates
+# All ensembl_peptide_id from the different sources
+interactors_ensp <- unique(c(csv_file_prots$ensembl_peptide_id, as.character(dyrk1a_strdb$ensembl_peptide_id), as.character(dyrk1a_targets_names$ensembl_peptide_id)))
+
+# All gene names
+all_interactors <- unique(c(as.character(csv_file_prots$GENES), as.character(dyrk1a_strdb$GENES), as.character(dyrk1a_targets_names$GENES)))
+
+# I have seen that some gene names refer to the same and I have corrected them manually. Checking if there are still some left.
+# Getting gene names with !!!synonyms!!! The 
+all_interactors_genenames <- select(up, keys = interactors_ensp, keytype = "ENSEMBL_PROTEIN", columns = c("ENSEMBL_PROTEIN", "GENES"))
+
+# Finding missing gene names and filling them
+ensp_no_gene <- all_interactors_genenames$ENSEMBL_PROTEIN[which(is.na(all_interactors_genenames$GENES))]
+stringid_no_gene <- paste("9606", ensp_no_gene, sep = ".")
+for(i in 1:length(ensp_no_gene)){
+  all_interactors_genenames$GENES[all_interactors_genenames$ENSEMBL_PROTEIN == ensp_no_gene[i]] <- proteins0$preferred_name[proteins0$protein_external_id==stringid_no_gene[i]]
+}
+
+# Column with genes in a list format
+all_interactors_genenames$GENES_list <- lapply(all_interactors_genenames$GENES, function(x){ c(unlist(strsplit(x, " "))) })
+
+# Checking if several genes from our list map onto the same row of gene names from uniprotkb. That means they are the same gene
+repeated_genes <-  list()
+c <- 1
+for(i in all_interactors_genenames$GENES_list){
+  # If more than one protein map to the same list of genes, that means they are the same
+  if(length(intersect(all_interactors, i)) > 1){
+    repeated_genes[c] <- list(all_interactors[which(all_interactors %in% i)])
+    c <- c+1
+  }
+}
+# No repeated genes
+
+# Adding STRING_id column
+all_interactors_genenames$STRING_id <- unlist(lapply(all_interactors_genenames$ENSEMBL_PROTEIN, function(x){paste("9606", x, sep=".")}))
+
+```
+
+```{r Output_dyrk1a_and_interactors}
+
+# Creating csv file with dyrk1a and interactors
+output_df <- data.frame(V1=rep("DYRK1A", length(all_interactors_genenames$GENES)), V2=all_interactors_genenames$GENES, row.names = NULL)
+# write.csv(output_df, file = "dyrk1a_interactors_level1.csv", row.names = FALSE)
+
+```
+
+```{r Obtaining_pubmed_ids_dyrk1a_neighbors, eval=FALSE}
+# dyrk1a_neighbors900_pubmeds <- data.frame(pubmed=NA, STRING_id=NA) #list() 
+dyrk1a_neighbors900_pubmed <- list()
+interactors <- vector()
+dyrk1a_neighbors900_no_pubmed <- vector()
+c = 1
+
+# Retrieving pubmed ids
+for(i in 1:nrow(all_interactors_genenames)){
+  print(paste(i, "out of", nrow(all_interactors_genenames), sep = " "))
+  interactor_gene <- all_interactors_genenames$GENES[i]
+  print(interactor_gene)
+  interactor_stringid <- all_interactors_genenames$STRING_id[i]
+  
+  dyrk1a <- dyrk1a_df$STRING_id
+  # Function to obtain all pubmed ids
+  paper_pubmed <- string_db$get_pubmed_interaction(dyrk1a, interactor_stringid)
+
+    if(length(paper_pubmed) != 0){
+    interactors <- c(interactors, interactor_gene) # Storing proteins whose interaction with DYRK1A is in one paper at least.
+    dyrk1a_neighbors900_pubmed[c] <- list(paper_pubmed) # Storing pubmed ids
+    c = c+1
+  }
+  else{
+    dyrk1a_neighbors900_no_pubmed <- c(dyrk1a_neighbors900_no_pubmed, interactor_gene)
+  }
+}
+# dyrk1a_neighbors900_pubmeds <- unlist(dyrk1a_neighbors900_pubmeds)
+
+
+# List of lists with proteins - related pubmed ids
+pub_prot_list <- list(pubmedids=dyrk1a_neighbors900_pubmed, proteins=interactors, STRING_id=proteins900$protein_external_id[proteins900$preferred_name %in% interactors])
+
+dyrk1a900_no_pubmed <- list(STRING_id=dyrk1a_neighbors900_no_pubmed,
+                                            protein_name=proteins900$preferred_name[
+                                              which(proteins900$protein_external_id %in% dyrk1a_neighbors900_no_pubmed)])
+```
+
+```{r}
+# Loading file with annotated interactions between dyrk1a and interactors (the previous output file with interaction information added manually)
+# # Some additional interactions found in the papers were added to this document
+dyrk1a_level1_table <- read.csv("dyrk1a_interactors_level1_complete.csv", header = T)
+
+# From factor to character columns
+dyrk1a_level1_table$V1 <- as.character(dyrk1a_level1_table$V1)
+dyrk1a_level1_table$V2 <- as.character(dyrk1a_level1_table$V2)
+dyrk1a_level1_table$Effect <- as.character(dyrk1a_level1_table$Effect)
+
+# Removing interactions without direction
+dyrk1a_level1_table_filt <- dyrk1a_level1_table[!dyrk1a_level1_table$Effect == "..",]
+
+# Joining all interactors
+dyrk1a_level1_int <- unique(c(dyrk1a_level1_table_filt$V1, dyrk1a_level1_table_filt$V2))
+dyrk1a_level1_int <- dyrk1a_level1_int[!dyrk1a_level1_int=="DYRK1A DYRK MNB MNBH"]
+
+# Creating dataframe for interactors and respective STRING_id
+dyrk1a_l1_int_df <- data.frame(GENES=as.character(dyrk1a_level1_int))
+dyrk1a_l1_int_df$GENES <- as.character(dyrk1a_l1_int_df$GENES) 
+dyrk1a_l1_int_df$GENES <- gsub(",", "", dyrk1a_l1_int_df$GENES) # Removing commas
+
+# Adding STRING_id column
+dyrk1a_l1_int_df$STRING_id <- NA
+for(i in 1:nrow(dyrk1a_l1_int_df)){
+  
+  dyrk1a_l1_int_df$STRING_id[i] <- ifelse(dyrk1a_l1_int_df$GENES[i] %in% all_interactors_genenames$GENES,
+                                          all_interactors_genenames$STRING_id[all_interactors_genenames$GENES==dyrk1a_l1_int_df$GENES[i]], NA)
+}
+
+# Some genes in the table are new, found in the bibliography. Adding the respective STRING_id from the protein list of stringdb
+no_STRING_db <- lapply(dyrk1a_l1_int_df$GENES[which(is.na(dyrk1a_l1_int_df$STRING_id))], function(x){unlist(strsplit(x, " "))}) # Splitting genes into lists of genes
+
+# Adding the missing STRING_id
+for(i in no_STRING_db){
+  if(any(i %in% proteins0$preferred_name)){
+    dyrk1a_l1_int_df$STRING_id[grep(paste(i, collapse = " ", sep = ""), dyrk1a_l1_int_df$GENES)] <- proteins0$protein_external_id[proteins0$preferred_name %in% i]
+  }
+}
+
+```
+
+We have found `r length(dyrk1a_level1_int) -1` DYRK1A interactors, `r length(dyrk1a_level1_table_filt$V1) - length(dyrk1a_level1_table_filt$V1[grep("DYRK1A DYRK", dyrk1a_level1_table_filt$V1)])`of which were exclusively regulators of Dyrk1a expression or activity.
+
+
+```{r}
+# Find interactions between DYRK1A interactors
+interact_level1 <- string_db900$get_interactions(dyrk1a_l1_int_df$STRING_id)
+interact_level1_stringid <- interact_level1[,1:2]
+
+# Getting PUBMEDids that support the interactions if they exist
+interact_level1_pubmed <- list()
+interactorsl1 <- vector()
+interact_level1_no_pubmed <- vector()
+stringid_level1 <- list()
+c = 1
+c2 = 1
+
+# Retrieving pubmed ids
+for(i in 1:nrow(interact_level1_stringid)){
+  print(paste(i, "out of", nrow(interact_level1_stringid), sep = " "))
+  # Function to obtain all pubmed ids
+  paper_pubmed <- string_db900$get_pubmed_interaction(interact_level1_stringid[i,1], interact_level1_stringid[i,2])
+
+  if(length(paper_pubmed) != 0){
+    # Protein names
+    interactorsl1[c] <- list(c(proteins900$preferred_name[proteins900$protein_external_id == interact_level1_stringid[i,1]],
+                                       proteins900$preferred_name[proteins900$protein_external_id == interact_level1_stringid[i,2]])) # Storing proteins whose interaction with DYRK1A is in one paper at least.
+    # Pubmed IDs
+    interact_level1_pubmed[c] <- list(paper_pubmed) # Storing pubmed ids
+    
+    # String IDs
+    stringid_level1[c] <- list(c(interact_level1_stringid[i,1], interact_level1_stringid[i,2]))
+    
+    # Counter
+    c = c+1
+  }
+  else{
+    interact_level1_no_pubmed[c2] <- list(proteins900$preferred_name[proteins900$protein_external_id == interact_level1_stringid[i,1]],
+                                       proteins900$preferred_name[proteins900$protein_external_id == interact_level1_stringid[i,2]])
+    c2 = c2+1
+  }
+}
+# dyrk1a_neighbors900_pubmeds <- unlist(dyrk1a_neighbors900_pubmeds)
+
+# Protein names to look for in the reported pubmed
+# proteins900 <- string_db900$get_proteins()
+
+# List of lists with proteins and corresponding pubmed ids / lack of pubmed ids
+pub_prot_list_level1 <- list(pubmedids=interact_level1_pubmed, proteins=interactorsl1, STRING_id=stringid_level1)
+
+level1_no_pubmed <- list(STRING_id=interact_level1_no_pubmed,
+                                            protein_name=proteins900$preferred_name[
+                                              which(proteins900$protein_external_id %in% interact_level1_no_pubmed)])
+
+
+interactor_df<- data.frame(V1=unlist(lapply(interactorsl1, function(x) x[[1]])), V2=unlist(lapply(interactorsl1, function(x) x[[2]])), V1ENSP=unlist(lapply(stringid_level1, function(x) unlist(strsplit(x[[1]],"\\."))[2])), V2ENSP=unlist(lapply(stringid_level1, function(x) unlist(strsplit(x[[2]], "\\."))[2])))
+
+STRINGid_unlist <- unique(unlist(stringid_level1))
+ensembl_id_unlist <- unlist(lapply(STRINGid_unlist, function(x) unlist(strsplit(x, "\\."))[2]))
+
+GENES_inter <- select(up, keys = ensembl_id_unlist, keytype = "ENSEMBL_PROTEIN", columns = c("ENSEMBL_PROTEIN", "GENES"))
+
+
+interactor_df$V1GENES <- NA
+interactor_df$V2GENES <- NA
+
+for(i in 1:nrow(interactor_df)){
+  interactor_df$V1GENES[i] <- GENES_inter$GENES[GENES_inter$ENSEMBL_PROTEIN==interactor_df$V1ENSP[i]]
+  interactor_df$V2GENES[i] <- GENES_inter$GENES[GENES_inter$ENSEMBL_PROTEIN==interactor_df$V2ENSP[i]]
+}
+
+# write.csv(interactor_df[,5:6], file="dyrk1a_level1_predicted_int.csv", row.names = F)
+```
+
+# Conversion from mouse to human identifiers
+
+```{r Loading_environment_with_mouse_proteins}
+# load("/Users/luciarodriguezvazquez/Desktop/Lab/Ilario/Report5_Phosphoproteome_analysis_more_info/Report5_Phosphoproteome_analysis_more_info.RData")
+load("up_down_rescued.RData")
+```
+
+```{r Conversion_mouse_to_human}
+# All uniprotkb of proteins with up/down-phosphorylated phosphosites and those with rescued phosphosites
+mouse_uniprotkb_all <- unique(unlist(lapply(as.character(c(data_up, data_down, rescued_up_decreasing, rescued_down_increasing)), function(x){unlist(strsplit(x, "\\."))[2]})))
+
+# Conversion to human uniprotkb identifiers
+human_converted <- getLDS(attributes=c("uniprotswissprot", "external_gene_name"), filters="uniprotswissprot", values=mouse_uniprotkb_all, mart=mouse,attributesL=c("external_gene_name"), martL=homosp)
+
+# Missing info in conversion -> doing with online tools
+not_converted <- mouse_uniprotkb_all[!mouse_uniprotkb_all %in% human_converted$UniProtKB.Swiss.Prot.ID]
+# write.table(as.factor(not_converted), "not_converted_by_getLDS.txt", sep = ",", row.names = FALSE, col.names = FALSE)
+
+# Loading uniprot to gene name conversion file obtained online
+uni_gene_not_converted <- read.table("uni_to_gene_online.txt")
+
+# Adding (still) missing uni to gene manually
+# not_converted[which(!not_converted %in% uni_gene_not_converted$V1)] # Uniprotkb with missing info
+uni_gene_not_converted <- rbind(uni_gene_not_converted, data.frame(V1=c("Q9CQU1","Q9CQU1"), V2=c("Map1b", "Map1a")))
+
+# Creating file with only gene names
+# write.table(as.factor(uni_gene_not_converted$V2), "dyrk1a_dir_net_not_converted_GENES.txt", sep = ",", row.names = FALSE, col.names = FALSE)
+
+# Loading file with homolog genes found with biomart online tool and with manual blast protein in ncbi
+converted_online_biomart <- read.table("mouse_to_human_online_gene_name_conversion.txt", sep = ",", header = T)
+colnames(converted_online_biomart) <- c("GENES_mouse", "GENES_human")
+converted_online_biomart <- rbind(converted_online_biomart, data.frame(GENES_mouse=c("Map1b", "Map1a", "Kiaa1211"), GENES_human=c("MAP1B", "MAP1A", "KIAA1211")))
+
+# Preparing tables to merge
+colnames(uni_gene_not_converted) <- c("UNIPROTKB", "GENES_mouse")
+colnames(human_converted) <- c("UNIPROTKB", "GENES_mouse", "GENES_human")
+converted_online_all <- merge(uni_gene_not_converted, converted_online_biomart, by="GENES_mouse")
+
+# Dataframe with all data converted
+human_converted <- rbind(human_converted, converted_online_all)
+```
+
+
+```{r Getting_phosphoproteomic_deregulated_and_rescued_ph}
+# # Mapping and keeping proteins that map to more than one gene name
+data_up_GENES <- human_converted[human_converted$UNIPROTKB %in% data_up_GENES,]
+data_down_GENES <- human_converted[human_converted$UNIPROTKB %in% data_down_GENES ,]
+rescued_down_increasing_GENES <- human_converted[human_converted$UNIPROTKB %in% rescued_down_increasing_GENES,]
+rescued_up_decreasing_GENES <- human_converted[human_converted$UNIPROTKB %in% rescued_up_decreasing_GENES,]
+tg_avg_GENES <- unique(unlist(lapply(rownames(tg_avg), function(x){ unlist(strsplit(x, "\\."))[2] })))
+tg_avg_GENES <- human_converted[human_converted$UNIPROTKB %in% tg_avg_GENES,]
+```
+
+```{r, fig.width=10, fig.height=10}
+# Assembling all the interactions
+level1_interactions_file <- read.csv("dyrk1a_level1_predicted_int_complete.csv", header = TRUE)
+level1_interactions_file$Effect <- as.character(level1_interactions_file$Effect)
+level1_interactions_file <- level1_interactions_file[which(!level1_interactions_file$Effect==""),]
+level1_interactions_file <- level1_interactions_file[which(!level1_interactions_file$Effect==".."),]
+
+# Full network
+full_network <- rbind(dyrk1a_level1_table_filt[,1:5], level1_interactions_file)
+full_network$V1_split <- unlist(lapply(full_network$V1, function(x) unlist(strsplit(x, " "))[1]))
+full_network$V2_split <- unlist(lapply(full_network$V2, function(x) unlist(strsplit(x, " "))[1]))
+full_network$V1_GENES_list <- lapply(full_network$V1, function(x) unlist(strsplit(x, " ")))
+full_network$V2_GENES_list <- lapply(full_network$V2, function(x) unlist(strsplit(x, " ")))
+
+```
+
+```{r Igraph_object}
+library(igraph)
+g_full <- graph_from_data_frame(full_network[,6:7], directed = TRUE, vertices = NULL)
+```
+
+
+
+```{r Editing_Dyrk1a_network}
+
+V(g_full)$color <- "grey88"  
+  
+for(i in 1:length(V(g_full)$name)){
+  to_search <- V(g_full)$name[i]
+  # if(to_search == "PRKN"){ to_search <- "PARK2" } # Changing name for a synonym
+  
+  # Getting all gene synonyms
+  index_to_search <- grep(to_search, full_network$V1_GENES_list)[1]
+  column <- 8
+  if(is.na(index_to_search)){ 
+    index_to_search <- grep(to_search, full_network$V2_GENES_list)[1]
+    column <- 9
+  }
+  to_search <- unlist(full_network[index_to_search, column])
+  
+  # In transgenic but not deregulated
+  if((any(to_search %in% tg_avg_GENES$GENES_human))&(!any(to_search %in% data_up_GENES$GENES_human))&(!any(to_search %in% data_down_GENES$GENES_human))){
+    V(g_full)$color[i] <- "greenyellow"
+  }
+  
+  # Deregulated Not rescued
+  if((any(to_search %in% tg_avg_GENES$GENES_human))&(!any(to_search %in% c(rescued_down_increasing_GENES$GENES_human, rescued_up_decreasing_GENES$GENES_human)))){
+    V(g_full)$color[i] <- "tomato1"
+  }
+  
+  # Deregulated Rescued up decreasing
+  if(any(to_search %in% rescued_up_decreasing_GENES$GENES_human)&(!any(to_search %in% rescued_down_increasing_GENES$GENES_human))){
+    V(g_full)$color[i] <- "orange"
+  }
+  
+  # Deregulated Rescued down increasing
+  if(!any(to_search %in% rescued_up_decreasing_GENES$GENES_human)&(any(to_search %in% rescued_down_increasing_GENES$GENES_human))){
+    V(g_full)$color[i] <- "lightblue"
+  }
+  
+  # Deregulated Rescued both ways
+  if(any(to_search %in% rescued_up_decreasing_GENES$GENES_human)&(any(to_search %in% rescued_down_increasing_GENES$GENES_human))){
+    V(g_full)$color[i] <- "aquamarine"
+  }
+
+}
+```
+
+### Igraph plot
+
+```{r Plot_igraph_Dyrk1a, fig.height=10, fig.width=14}
+# Plot
+# set.seed(1)
+plot.igraph(g_full, layout=layout.davidson.harel, edge.width = 2, vertex.size=17, vertex.label.color='gray0')
+# 
+# 
+# plot(layout.sugiyama(g_full, attributes="all", layers = V(g_full)$layer)$extd_graph,
+#  vertex.size=7, frame=FALSE,
+#  main="DYRK1A directed network")
+# legend("topright",
+#        c("Not found in\nphosphoproteome", "Not deregulated", "Deregulated and\nnot rescued", "Deregulated and rescued\nby down-phosphorylation", "Deregulated and rescued\nby up-phosphorylation", "Deregulated and rescued\nboth ways"), bty="n", fill=c("grey88", "greenyellow","tomato1", "orange", "lightblue", "aquamarine"), cex=1, title=expression(bold("Overlap with Tg phospho-\nproteomic data")))
+
+```
+
+### Circos plot
+
+```{r Circosplot_Dyrk1a_data}
+# Different network style
+library(circlize)
+full_network_circl <- full_network
+full_network_circl$freq <- rep(1, nrow(full_network_circl)) # Column with frequency of the interaction is required. Adding a column with 1 values.
+
+# Creating vector with colors
+int_list_split <- unique(c(full_network$V1_split, full_network$V2_split))
+grid.col <- list()
+
+for(i in int_list_split){
+  
+  to_search <- i
+  # if(to_search == "PRKN"){ to_search <- "PARK2" } # Changing name for a synonym
+  
+  # Getting all gene synonyms
+  index_to_search <- grep(to_search, full_network$V1_GENES_list)[1]
+  column <- 8
+  if(is.na(index_to_search)){ 
+    index_to_search <- grep(to_search, full_network$V2_GENES_list)[1]
+    column <- 9
+  }
+  to_search <- unlist(full_network[index_to_search, column])
+  
+  
+  if((any(to_search %in% tg_avg_GENES$GENES_human))&(!any(to_search %in% data_up_GENES$GENES_human))&(!any(to_search %in% data_down_GENES$GENES_human))){# In transgenic but not deregulated
+    grid.col[[i]] <- "greenyellow"
+  } else if((any(to_search %in% tg_avg_GENES$GENES_human))&(!any(to_search %in% c(rescued_down_increasing_GENES$GENES_human, rescued_up_decreasing_GENES$GENES_human)))){# Deregulated Not rescued
+    grid.col[[i]] <- "tomato1"
+  }else if(any(to_search %in% rescued_up_decreasing_GENES$GENES_human)&(!any(to_search %in% rescued_down_increasing_GENES$GENES_human))){# Deregulated Rescued up decreasing
+    grid.col[[i]] <- "orange"
+  }else if(any(to_search %in% rescued_down_increasing_GENES$GENES_human)&(!any(to_search %in% rescued_up_decreasing_GENES$GENES_human))){# Deregulated Rescued down increasing
+   grid.col[[i]] <- "lightblue"
+  }else if(any(to_search %in% rescued_down_increasing_GENES$GENES_human)&(any(to_search %in% rescued_up_decreasing_GENES$GENES_human))){# Deregulated Rescued down increasing
+   grid.col[[i]] <- "aquamarine"
+  }else{ # Everything else
+    grid.col[[i]] <- "grey88"}
+}
+
+
+```
+
+```{r Circosplot_Dyrk1a_plot, fig.height=10, fig.width=10}
+# Plotting
+# png("circosplot_dyrk1a.png", res=300, 3000, 3000)
+set.seed(122)
+chordDiagram(full_network_circl[,c(6:7,10)], annotationTrack = "grid", preAllocateTracks = 1)
+  circos.trackPlotRegion(track.index = 1, panel.fun = function(x, y) {
+  xlim = get.cell.meta.data("xlim")
+  xplot = get.cell.meta.data("xplot")
+  ylim = get.cell.meta.data("ylim")
+  sector.name = get.cell.meta.data("sector.index")
+  circos.text(mean(xlim), ylim[1], sector.name, facing = "clockwise", niceFacing = TRUE, adj = c(0, 0.5))
+  # circos.axis(labels = as.data.frame(names(grid.col)), labels.col = c(unlist(grid.col)))
+  # circos.axis(h = "top", labels.cex = 0.5, major.tick.percentage = 0.2, sector.index = sector.name, track.index = 2)
+}, bg.border = NA)
+# dev.off()
+```
